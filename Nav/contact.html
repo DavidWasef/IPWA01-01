@@ -23,21 +23,90 @@
                 <h1 class="text-left w-75 m-auto">Kontakt</h1><br>
                 <form action="mailto:example@email.com" method="post" enctype="text/plain" class="text-left w-75 m-auto">
                     <label for="name" class="mb-4 me-4">Name:</label>
-                    <input type="text" id="name" name="name" required><br>
+                    <input type="text" id="name" name="name" required maxlength="15"><br>
                 
                     <label for="email" class="mb-4 me-4">E-Mail:</label>
-                    <input type="text" id="email" name="email" required><br>
+                    <input type="text" id="email" name="email" required maxlength="15"><br>
                 
                     <label for="subject" class="mb-4 me-4">Betreff:</label>
-                    <input type="text" id="subject" name="subject" required><br>
+                    <input type="text" id="subject" name="subject" required maxlength="15"><br>
                 
                     <label for="message" class="mb-4">Nachricht:</label>
-                    <textarea id="message" name="message" required></textarea><br>
+                    <textarea id="message" name="message" required maxlength="100"></textarea><br>
                 
                     <input type="submit" value="Absenden"><br>
                 </form>
             </section>
         </main>
+        <script>
+            var inputName = document.getElementById("name");
+            inputName.addEventListener("keypress", function(event){
+                var charName = event.key;
+                if (!(/^[a-zA-Z]/).test(charName)){
+                    event.preventDefault();
+                }
+            });
+
+            inputName.addEventListener("paste", function(event){
+                var clipboardDataName = event.clipboardData || window.clipboardData;
+                var pastedName = clipboardDataName.getData('text');
+                var patternName = /^[a-zA-Z]/;
+                if (!patternName.test(pastedName)){
+                    event.preventDefault();
+                }
+            })
+
+            var inputMail = document.getElementById("email");
+            inputMail.addEventListener("keypress", function(event){
+                var charMail = event.key;
+                if (!(/^[a-zA-Z0-9@.]+$/).test(charMail)){
+                    event.preventDefault();
+                }
+            });
+
+            inputMail.addEventListener("paste", function(event){
+                var clipboardDataMail = event.clipboardData || window.clipboardData;
+                var pastedMail = clipboardDataMail.getData('text');
+                var patternMail = /^[a-zA-Z0-9@.]+$/;
+                if (!patternMail.test(pastedMail)){
+                    event.preventDefault();
+                }
+            })
+
+            var inputBetreff = document.getElementById("subject");
+            inputBetreff.addEventListener("keypress", function(event){
+                var charBetreff = event.key;
+                if (!(/^[a-zA-Z0-9]+$/).test(charBetreff)){
+                    event.preventDefault();
+                }
+            });
+
+            inputBetreff.addEventListener("paste", function(event){
+                var clipboardDataBetreff = event.clipboardData || window.clipboardData;
+                var pastedBetreff = clipboardDataBetreff.getData('text');
+                var patternBetreff = /^[a-zA-Z0-9]+$/;
+                if (!patternBetreff.test(pastedBetreff)){
+                    event.preventDefault();
+                }
+            })
+
+            var inputNachricht = document.getElementById("message");
+            inputNachricht.addEventListener("keypress", function(event){
+                var charNachricht = event.key;
+                if (!(/^[a-zA-Z0-9.,]+$/).test(charNachricht)){
+                    event.preventDefault();
+                }
+            });
+
+            inputNachricht.addEventListener("paste", function(event){
+                var clipboardDataNachricht = event.clipboardData || window.clipboardData;
+                var pastedNachricht = clipboardDataNachricht.getData('text');
+                var patternNachricht = /^[a-zA-Z0-9.,]+$/;
+                if (!patternNachricht.test(pastedNachricht)){
+                    event.preventDefault();
+                }
+            })
+        </script>
         <footer class="bg-dark text-light pt-4 pb-2">
             <nav>
                 <ul>
