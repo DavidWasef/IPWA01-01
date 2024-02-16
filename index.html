@@ -60,15 +60,15 @@
                     Ihren CO2-Fußabdruck zu reduzieren und einen positiven Wandel für die Zukunft zu bewirken. Hier ist eine Liste mit denen zusammengearbeitet wird, um den CO2-Fußabdruck dieser in den nächsten Jahren zu senken.
                 </div><br>
             </section>
-            <div class="w-75 m-auto">
-              <select id="auswahlLand">
+            <div class="w-75 m-auto"><h4>Filtern:</h4>
+              <select id="auswahlLand" onchange="filternLand()">
               </select>
-              <select id="auswahlUnternehmen">
+              <select id="auswahlUnternehmen" onchange="filternUnternehmen()">
               </select>
-              <select id="auswahlEmission">
+              <select id="auswahlEmission" onchange="filternEmission()">
               </select>
+              <button onclick="refresh()">zurücksetzen</button>
             </div>
-            <input type="text" id="myInput" onkeyup="suchen()" placeholder="Filtern.." class="d-flex w-75 m-auto" maxlength="30">
             <table class="table table-bordered display-flex w-75 mx-auto" id="sortier-table">
                 <div class="row">
                     <div class="col-lg–4 col-sm–12">
@@ -572,9 +572,9 @@
              });
           });
 
-          function suchen() {
+          function filternLand() {
             var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("myInput");
+            input = document.getElementById("auswahlLand");
             filter = input.value.toUpperCase();
             table = document.getElementById("sortier-table");
             tr = table.getElementsByTagName("tr");
@@ -584,6 +584,46 @@
               if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }
+            }
+          }
+
+          function filternUnternehmen() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("auswahlUnternehmen");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("sortier-table");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[1];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  tr[i].style.display = "";
+                } else {
+                  tr[i].style.display = "none";
+                }
+              }
+              console.log(txtValue + " " + filter);
+            }
+          }
+
+          function filternEmission() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("auswahlEmission");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("sortier-table");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+              td = tr[i].getElementsByTagName("td")[2];
+              if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase() === filter.toUpperCase()) {
                   tr[i].style.display = "";
                 } else {
                   tr[i].style.display = "none";
@@ -659,7 +699,10 @@
             document.getElementById("navbar").classList.add("float-left");
           }
 
-
+          function refresh()
+          {
+            location.reload();
+          }
 
           </script>
               <footer class="bg-dark text-light pt-4 pb-2" id="Footer">
