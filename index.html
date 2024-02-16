@@ -60,6 +60,14 @@
                     Ihren CO2-Fußabdruck zu reduzieren und einen positiven Wandel für die Zukunft zu bewirken. Hier ist eine Liste mit denen zusammengearbeitet wird, um den CO2-Fußabdruck dieser in den nächsten Jahren zu senken.
                 </div><br>
             </section>
+            <div class="w-75 m-auto">
+              <select id="auswahlLand">
+              </select>
+              <select id="auswahlUnternehmen">
+              </select>
+              <select id="auswahlEmission">
+              </select>
+            </div>
             <input type="text" id="myInput" onkeyup="suchen()" placeholder="Filtern.." class="d-flex w-75 m-auto" maxlength="30">
             <table class="table table-bordered display-flex w-75 mx-auto" id="sortier-table">
                 <div class="row">
@@ -584,6 +592,66 @@
             }
           }
 
+          window.onload = function() {
+          var selectElementLand = document.getElementById("auswahlLand");
+          var selectElementUnternehmen = document.getElementById("auswahlUnternehmen");
+          var selectElementEmission = document.getElementById("auswahlEmission");
+          var table2 = document.getElementById("sortier-table");
+          var rows2 = table.getElementsByTagName("tr");
+          for (var i = 1; i<rows2.length; i++)
+          {
+              var cells2 = rows2[i].getElementsByTagName("td");
+              if (cells2.length === 0){
+                  cells2 = rows2[i].getElementsByTagName("th");
+              }
+              if (cells2.length > 0)
+              {
+                var optionElementLand = document.createElement("option");
+                var optionElementUnternehmen = document.createElement("option");
+                var optionElementEmission = document.createElement("option");optionElementLand.text = cells2[0].textContent;
+                optionElementLand.value = cells2[0].textContent;
+                selectElementLand.appendChild(optionElementLand);
+                optionElementUnternehmen.text = cells2[1].textContent;
+                optionElementUnternehmen.value = cells2[1].textContent;
+                selectElementUnternehmen.appendChild(optionElementUnternehmen);
+                optionElementEmission.text = cells2[2].textContent;
+                optionElementEmission.value = cells2[2].textContent;
+                selectElementEmission.appendChild(optionElementEmission);
+              }
+          }
+          var optionsLand = selectElementLand.options;
+          for (var i = 0; i<optionsLand.length; i++)
+          {
+            for (var j = 1+1; j<optionsLand.length; j++)
+            {
+              if (optionsLand[i].value === optionsLand[j].value){
+                  optionsLand[j].remove();
+              }
+            }
+          }
+
+          var optionsUnternehmen = selectElementUnternehmen.options;
+          for (var i = 0; i<optionsUnternehmen.length; i++)
+          {
+            for (var j = 1+1; j<optionsUnternehmen.length; j++)
+            {
+              if (optionsUnternehmen[i].value === optionsUnternehmen[j].value){
+                  optionsUnternehmen[j].remove();
+              }
+            }
+          }
+
+          var optionsEmission = selectElementEmission.options;
+          for (var i = 0; i<optionsEmission.length; i++)
+          {
+            for (var j = 1+1; j<optionsEmission.length; j++)
+            {
+              if (optionsEmission[i].value === optionsEmission[j].value){
+                  optionsEmission[j].remove();
+              }
+            }
+          }
+        }
 
           if (document.documentElement.dir === 'rtl') {
             document.getElementById("navbar").classList.add("float-right");
