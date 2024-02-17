@@ -75,7 +75,7 @@
             </div>
             <table class="table table-bordered w-75 mx-auto" id="sortier-table">
                 <div class="row">
-                    
+                    <div class="col-lg–4 col-sm–12">
                         <thead class="text-center">
                         <tr></tr>
                             <th class="bg-dark text-white" date-type="string" title="Nach Land sortieren">Land</th>
@@ -532,7 +532,6 @@
           };
           
           const sortColumn = function(index, headers) {
-          
            const cls = ["upArrow", "dnArrow"];
            headers.forEach((header) => {
             document.getElementById(header.id).classList.remove(...cls);
@@ -662,6 +661,7 @@
                 selectElementEmission.appendChild(optionElementEmission);
               }
           }
+          
           var optionsLand = selectElementLand.options;
           for (var i = 0; i<optionsLand.length; i++)
           {
